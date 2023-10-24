@@ -1,4 +1,5 @@
 
+from nltk.tokenize import word_tokenize
 import sys
 import re
 import csv
@@ -42,10 +43,16 @@ def main():
 
     for id_mondo in sorted(dict_mondo_label.keys()):
         for label in list(set(dict_mondo_label[id_mondo])):
-            print(id_mondo + "\tlabel\t" + label)
+            tokens = word_tokenize(label.replace(',', ''))
+            tokens_sorted = sorted(tokens)
+            print(id_mondo + "\tlabel\t" + label + "\t" + " ".join(tokens_sorted))
+
         if id_mondo in dict_mondo_synonym:
             for synonym in list(set(dict_mondo_synonym[id_mondo])):
-                print(id_mondo + "\tsynonym\t" + synonym)
+                tokens = word_tokenize(synonym.replace(',', ''))
+                tokens_sorted = sorted(tokens)
+                #print(id_mondo + "\tlabel\t" + synonym + "\t" + " ".join(tokens_sorted))
+                print(id_mondo + "\tsynonym\t" + synonym + "\t" + " ".join(tokens_sorted))
 
 
 if __name__ == '__main__':
